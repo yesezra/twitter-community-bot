@@ -13,6 +13,12 @@ userStream.on('tweet', function(tweet) {
   retweetById(tweet.id_str);
 });
 
+twit.get('statuses/mentions_timeline', {}, function (err, reply) {
+  for (var i = reply.length - 1 ; i >= 0; i--) {
+    retweetById(reply[i].id_str);
+  }
+});
+
 var retweetById = function(idStr) {
   twit.post('statuses/retweet/:id', {id: idStr}, function(err, reply) {
     console.log("retweeted id:" + idStr);
