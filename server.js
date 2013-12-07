@@ -13,11 +13,28 @@ userStream.on('tweet', function(tweet) {
   retweetById(tweet.id_str);
 });
 
-twit.get('statuses/mentions_timeline', {}, function (err, reply) {
-  for (var i = reply.length - 1 ; i >= 0; i--) {
-    retweetById(reply[i].id_str);
-  }
-});
+var retweetMentionsFromTimelineSince = function(sinceId) {
+  twit.get('statuses/mentions_timeline', {since_id: sinceId}, function (err, reply) {
+    for (var i = reply.length - 1 ; i >= 0; i--) {
+      retweetById(reply[i].id_str);
+    }
+  });
+};
+
+
+var findLastRetweet = function(callback) {
+  twit.get('statuses/user_timeline', {}, function(err, reply) {
+    var mostRecentRetweetId;
+    reply.forEach(function(element, index, array) {
+      if (element.retweeted) {
+        mostRecentRetweetId = element.id_str;
+        return false;
+      }
+    });
+
+    callback(mostRecentRetweetId);
+  });
+};
 
 var retweetById = function(idStr) {
   twit.post('statuses/retweet/:id', {id: idStr}, function(err, reply) {
@@ -27,3 +44,6 @@ var retweetById = function(idStr) {
   });
 };
 
+findLastRetweet(function(lastRetweetId) {
+  retweetMentionsFromTimelineSince(lastRetweetId);
+});
