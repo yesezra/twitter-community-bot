@@ -9,6 +9,9 @@
   "author": "Ezra Spier",
   "license": "BSD",
   "readmeFilename": "README.md",
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "twit": "~1.1.11"
   }
