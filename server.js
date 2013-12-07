@@ -5,6 +5,15 @@ var twit = new Twitter({
     access_token: process.env.ACCESS_TOKEN,
     access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+  res.send('Nothing to see here. Move along.');
+});
+
+app.listen(process.env.PORT);
+console.log("Express is running on port " + process.env.PORT);
 
 var userStream = twit.stream('user', { with: 'user', replies: 'all' });
 

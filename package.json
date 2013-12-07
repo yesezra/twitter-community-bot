@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "A little bot for community accounts on twitter",
   "main": "app.js",
-  "scripts": {
-      },
+  "scripts": {},
   "repository": "",
   "author": "Ezra Spier",
   "license": "BSD",
@@ -13,6 +12,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "twit": "~1.1.11"
+    "twit": "~1.1.11",
+    "express": "~3.4.6"
   }
 }
