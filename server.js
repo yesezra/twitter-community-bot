@@ -9,7 +9,7 @@ var twit = new Twitter({
 var userStream = twit.stream('user', { with: 'user', replies: 'all' });
 
 userStream.on('tweet', function(tweet) {
-  console.log('received mention');
+  console.log('Received mention! id: ' + tweet.id_str);
   retweetById(tweet.id_str);
 });
 
