@@ -12,8 +12,9 @@ app.get('/', function(req, res){
   res.send('Nothing to see here. Move along.');
 });
 
-app.listen(process.env.PORT);
-console.log("Express is running on port " + process.env.PORT);
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log("Express is running on port " + port);
 
 var userStream = twit.stream('user', { with: 'user', replies: 'all' });
 
